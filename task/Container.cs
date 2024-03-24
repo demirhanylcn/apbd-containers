@@ -1,23 +1,32 @@
 ﻿namespace task;
 using System;
 
-public enum Type
-{
-    Hazardous
-}
 
 public abstract class Container
 {
-    public string SerialNumber {get;}
-    public static int SerialCount = 0;
-    public string SerialStart = "KON-";
+    
+    public static int serialCount = 0;
+    public double MaxWeight { get; protected set; }
+    public double Height { get; protected set; }
+    public double ContainerWeight { get; protected set; }
+    public double Depth { get; protected set; }
+    public double CurrentWeight { get; protected set; }
+    public List<Product> products { get; set; }
 
 
-    public abstract void initalizeSerial();
+    public Container(double height, double depth)
+    {
+        Height = height;
+        Depth = depth;
+        ContainerWeight = 250;
+        MaxWeight = 1250;
+        CurrentWeight += ContainerWeight;
+    }
+    public abstract void initalizeSerial(Type type);
     public abstract void emptyTheCargo();
     public abstract void loadTheCargo(Product product);
-    public override string ToString()
+    public int getSerialCount()
     {
-        return this.SerialNumber;
+        return serialCount++;
     }
 }
