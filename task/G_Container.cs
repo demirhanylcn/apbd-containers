@@ -4,7 +4,8 @@ public class G_Container : Container
 {
     private string serial;
     private Type containerType { get; set; }
-
+    public List<Product> products = new List<Product>();
+    
     public G_Container(double height, double depth, Type ContainerType ) : base(height, depth)
     {
         initalizeSerial(containerType);
@@ -42,11 +43,13 @@ public class G_Container : Container
     public override string ToString()
     {
         string productsString = "";
-        foreach (Product each in products)
+        if (products.Count != 0)
         {
-            productsString += each + "\n";
+            foreach (Product each in products)
+            {
+                productsString += each + "\n";
+            }
         }
-
         productsString += serial;
 
         return productsString;

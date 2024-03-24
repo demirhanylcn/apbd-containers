@@ -28,14 +28,21 @@ public class Ship
         containers = new List<Container>();
     }
 
+    public override string ToString()
+    {
+        return Name + " " + Serial + " " + getContainerContext();
+    }
 
-    public void getContainerContext()
+    
+    public string getContainerContext()
     {
         string context = "";
         foreach (Container each in containers)
         {
             context += each + "\n";
         }
+
+        return context;
     }
 
     public void loadContainer(Container container)

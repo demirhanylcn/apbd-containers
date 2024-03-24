@@ -11,7 +11,9 @@ public abstract class Container
     public double ContainerWeight { get; protected set; }
     public double Depth { get; protected set; }
     public double CurrentWeight { get; protected set; }
-    public List<Product> products { get; set; }
+    
+
+    
 
 
     public Container(double height, double depth)
@@ -29,4 +31,5 @@ public abstract class Container
     {
         return serialCount++;
     }
+    
 }

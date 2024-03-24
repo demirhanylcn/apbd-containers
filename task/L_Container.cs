@@ -5,6 +5,7 @@ public class L_Container : Container, IHazardNotifier
     private string serial;
     private Type containerType { get; set; }
     private bool isHazardous { get; set; }
+    public List<Product> products = new List<Product>();
 
     public L_Container(double Height, double Depth, Type ContainerType, bool hazardous) : base(Height, Depth)
     {
@@ -23,7 +24,6 @@ public class L_Container : Container, IHazardNotifier
         products.Clear();
     }
 
-    // if the mass of product is greater than the limit throw OverFill
     public override void loadTheCargo(Product product)
     {
         if (isHazardous)
@@ -68,17 +68,25 @@ public class L_Container : Container, IHazardNotifier
 
     public override string ToString()
     {
-        string productsString = "";
-        foreach (Product each in products)
-        {
-            productsString += each + "\n";
-        }
-
-        productsString += serial;
-
-        return productsString;
+        string productsText = getContainerInfo();
+        return serial + "\n" + productsText;
     }
 
+    public string getContainerInfo()
+    {
+        if (products.Count > 0)
+        {
+            string containerInfo = "";
+            for (int i = 0; i < products.Count; i++)
+            {
+                containerInfo += products[i] + "\n";
+            }
+
+            return containerInfo;
+        }
+        else return "";
+    
+    }
     public void L_notify(L_Container container, string message)
     {
         Console.WriteLine(container + "\n" + message);

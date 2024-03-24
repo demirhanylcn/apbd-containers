@@ -1,10 +1,13 @@
-﻿namespace task;
+﻿using System.ComponentModel;
+
+namespace task;
 
 public class R_Container : Container
 {
     private string serial;
     private Type containerType { get; set; }
     private double containerTemperature;
+    public List<Product> products = new List<Product>();
 
     public R_Container(double height, double depth, Type ContainerType, double containerTemperature) : base(height,
         depth)
@@ -16,12 +19,12 @@ public class R_Container : Container
 
     public override void initalizeSerial(Type type)
     {
-        throw new NotImplementedException();
+        this.serial = "KON-" + type + "-" + getSerialCount();
     }
 
     public override void emptyTheCargo()
     {
-        throw new NotImplementedException();
+        products.Clear();
     }
 
     public override void loadTheCargo(Product product)
@@ -48,11 +51,13 @@ public class R_Container : Container
     public override string ToString()
     {
         string productsString = "";
-        foreach (Product each in products)
+        if (products.Count != 0)
         {
-            productsString += each + "\n";
+            foreach (Product each in products)
+            {
+                productsString += each + "\n";
+            }
         }
-
         productsString += serial;
 
         return productsString;
